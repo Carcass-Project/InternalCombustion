@@ -1,0 +1,12 @@
+C:\Users\bitte\source\repos\InternalCombustion\InternalCombustion\bin\Debug\net6.0\InternalCombustion.deps.json
+C:\Users\bitte\source\repos\InternalCombustion\InternalCombustion\bin\Debug\net6.0\InternalCombustion.dll
+C:\Users\bitte\source\repos\InternalCombustion\InternalCombustion\bin\Debug\net6.0\InternalCombustion.pdb
+C:\Users\bitte\source\repos\InternalCombustion\InternalCombustion\obj\Debug\net6.0\InternalCombustion.csproj.AssemblyReference.cache
+C:\Users\bitte\source\repos\InternalCombustion\InternalCombustion\obj\Debug\net6.0\InternalCombustion.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\bitte\source\repos\InternalCombustion\InternalCombustion\obj\Debug\net6.0\InternalCombustion.AssemblyInfoInputs.cache
+C:\Users\bitte\source\repos\InternalCombustion\InternalCombustion\obj\Debug\net6.0\InternalCombustion.AssemblyInfo.cs
+C:\Users\bitte\source\repos\InternalCombustion\InternalCombustion\obj\Debug\net6.0\InternalCombustion.csproj.CoreCompileInputs.cache
+C:\Users\bitte\source\repos\InternalCombustion\InternalCombustion\obj\Debug\net6.0\InternalCombustion.dll
+C:\Users\bitte\source\repos\InternalCombustion\InternalCombustion\obj\Debug\net6.0\refint\InternalCombustion.dll
+C:\Users\bitte\source\repos\InternalCombustion\InternalCombustion\obj\Debug\net6.0\InternalCombustion.pdb
+C:\Users\bitte\source\repos\InternalCombustion\InternalCombustion\obj\Debug\net6.0\ref\InternalCombustion.dll
