@@ -22,20 +22,20 @@ class Application
 
         basicShader = new Shader("vertex.glsl", "fragment.glsl");
 
+        msh = Mesh.GenMeshCube();
+
         var mat = new ICMaterial(basicShader);
         mat.matColor = Color4.Black;
+        msh.material = mat;
 
-        msh = Mesh.GenMeshCube(mat);
+        msh.rotation = Matrix4.CreateRotationX(0) * Matrix4.CreateRotationY(0) * Matrix4.CreateRotationZ(0);
 
-        msh.position = Vector3.UnitY;
-        msh.size = Vector3.One;
-  
         basicShader.Use();
 
         DevInput.onMouseMove += OnMouseMove;
         DevInput.onKeyPressed += OnKeyDown;
 
-        cam = new ICCamera(new Vector3(0, 0, -1), window.Size.X / (float)window.Size.Y);
+        cam = new ICCamera(new Vector3(0, 0, -5), window.Size.X / (float)window.Size.Y);
 
         window.CursorGrabbed = true;
     }
@@ -48,7 +48,6 @@ class Application
 
         GL.DepthMask(true);
         msh.Draw();
-        GL.DepthMask(false);
     }
 
     int i = 0;
@@ -92,8 +91,8 @@ class Application
 
     void onUpdate(double dt)
     {
-        i++;
-        msh.rotation = Matrix4.CreateRotationX(i*(float)dt) * Matrix4.CreateRotationY(i* (float)dt) * Matrix4.CreateRotationZ(0);
+        //i++;
+        //msh.rotation = Matrix4.CreateRotationX(i*(float)dt) * Matrix4.CreateRotationY(i* (float)dt) * Matrix4.CreateRotationZ(0);
     }
 
     void onExit()
