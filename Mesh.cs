@@ -47,7 +47,7 @@ namespace InternalCombustion
             vertexBuffer.Destroy();
         }
 
-        public unsafe Mesh(uint[] Indices, ICVertex[] Vertices, ICMaterial mat)
+        public unsafe Mesh(uint[] Indices, ICVertex[] Vertices)
         {
             indices = Indices;
             vertices = Vertices;
@@ -60,9 +60,6 @@ namespace InternalCombustion
 
             vertexArrObj = new Internals.VAO();
             vertexArrObj.Bind();
-
-            var vertexLocation = mat.matShader.GetAttribLocation("aPos");
-            GL.EnableVertexAttribArray(vertexLocation);
 
             GL.EnableVertexAttribArray(0);
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, sizeof(ICVertex), 0);
@@ -78,7 +75,7 @@ namespace InternalCombustion
         #endregion
 
         #region StaticFunctions
-        public static Mesh GenMeshCube(ICMaterial mat)
+        public static Mesh GenMeshCube()
         {
             Mesh msh;
 
@@ -103,9 +100,9 @@ namespace InternalCombustion
                  4, 5, 0, 0, 5, 1
             };
 
-            msh = new Mesh(indices.ToArray(), vertices.ToArray(), mat);
+            msh = new Mesh(indices.ToArray(), vertices.ToArray());
 
-            msh.position = new Vector3(0, 0, 0);
+            msh.position = new Vector3(0, 0, 5);
             msh.size = Vector3.One;
             msh.rotation = Matrix4.CreateRotationX(0) * Matrix4.CreateRotationY(0) * Matrix4.CreateRotationZ(0);
 

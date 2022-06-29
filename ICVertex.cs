@@ -8,14 +8,14 @@ using OpenTK.Mathematics;
 
 namespace InternalCombustion
 {
-    [StructLayout(LayoutKind.Explicit)]
+
     public struct ICVertex
     {
-        [FieldOffset(0)]
+
         public Vector3 Position;
-        [FieldOffset(1)]
+
         public Vector3 Normal;
-        [FieldOffset(2)]
+
         public Vector3 TexCoords;
 
         public ICVertex(Vector3 pos)

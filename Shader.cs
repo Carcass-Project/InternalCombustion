@@ -176,6 +176,17 @@ namespace InternalCombustion
         public void SetMatrix4(string name, Matrix4 data)
         {
             GL.UseProgram(Handle);
+            GL.UniformMatrix4(_uniformLocations[name], false, ref data);
+        }
+
+        /// <summary>
+        /// Sets Matrix4, and Transposes.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="data"></param>
+        public void SetMatrix4T(string name, Matrix4 data)
+        {
+            GL.UseProgram(Handle);
             GL.UniformMatrix4(_uniformLocations[name], true, ref data);
         }
 
