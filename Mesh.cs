@@ -102,8 +102,8 @@ namespace InternalCombustion
 
             msh = new Mesh(indices.ToArray(), vertices.ToArray());
 
-            msh.position = new Vector3(0, 0, 5);
-            msh.size = Vector3.One;
+            msh.position = new Vector3(0, 0, -5);
+            msh.size = new Vector3(0.1f, 0.1f, 0.1f);
             msh.rotation = Matrix4.CreateRotationX(0) * Matrix4.CreateRotationY(0) * Matrix4.CreateRotationZ(0);
 
             return msh;
