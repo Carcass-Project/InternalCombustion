@@ -37,9 +37,9 @@ namespace InternalCombustion
 
         protected override void OnRenderFrame(FrameEventArgs args)
         {
-            base.OnRenderFrame(args);        
+            base.OnRenderFrame(args);
+            DevInput._deviceDeltaTime = (float)args.Time;
             _OnRender?.Invoke(args.Time);
-
             SwapBuffers();
         }
 
@@ -47,6 +47,30 @@ namespace InternalCombustion
         {
             base.OnUpdateFrame(args);
             _OnUpdate?.Invoke(args.Time);
+        }
+
+        protected override void OnKeyDown(KeyboardKeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+
+            DevInput.currentKeyPressed = e.Key;
+            DevInput.RaiseKeyPressedEvent();
+        }
+
+        protected override void OnMouseMove(MouseMoveEventArgs e)
+        {
+            base.OnMouseMove(e);
+
+            DevInput.mousePosition = e.Position;
+            DevInput.RaiseMouseMoveEvent();
+        }
+
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseDown(e);
+
+            DevInput.currentMouseButton = e.Button;
+            DevInput.RaiseMouseButtonEvent();
         }
 
         protected override void OnClosing(CancelEventArgs e)

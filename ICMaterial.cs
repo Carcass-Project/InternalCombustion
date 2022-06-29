@@ -10,7 +10,7 @@ namespace InternalCombustion
     public class ICMaterial
     {
         public Shader matShader;
-        public Color4 matColor = Color4.White;
+        public Color4 matColor = Color4.Red;
 
         public static ICMaterial Default { 
             get

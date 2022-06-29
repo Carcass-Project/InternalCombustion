@@ -22,6 +22,11 @@ namespace InternalCombustion
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
         }
 
+        public void Draw(IRenderable rendr)
+        {
+            rendr.Draw();
+        }
+
         public void VertexDataI(int index, int size, VertexAttribPointerType type, bool normalized, int stride, int offset)
         {
             GL.VertexAttribPointer(index, size, type, normalized, stride, offset);

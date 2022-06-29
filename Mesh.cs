@@ -30,8 +30,10 @@ namespace InternalCombustion
         {
             vertexArrObj.Bind();
 
-            material.matShader.SetMatrix4("model", Matrix4.Identity * Matrix4.CreateTranslation(position) * Matrix4.CreateScale(size) * rotation);
+            material.matShader.SetMatrix4("model", Matrix4.CreateTranslation(position) * Matrix4.CreateScale(size) * rotation);
             material.matShader.SetVector3("modelColor", ((Vector4)material.matColor).Xyz);
+
+            material.matShader.Use();
 
             GL.DrawElements(BeginMode.Triangles, indices.Length, DrawElementsType.UnsignedInt, 0); 
             GL.BindVertexArray(0);
@@ -61,10 +63,10 @@ namespace InternalCombustion
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, sizeof(ICVertex), 0);
 
             GL.EnableVertexAttribArray(1);
-            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, sizeof(ICVertex), Marshal.OffsetOf(typeof(ICVertex), "normal"));
+            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, sizeof(ICVertex), Marshal.OffsetOf(typeof(ICVertex), "Normal"));
 
             GL.EnableVertexAttribArray(2);
-            GL.VertexAttribPointer(2, 3, VertexAttribPointerType.Float, false, sizeof(ICVertex), Marshal.OffsetOf(typeof(ICVertex), "texCoords"));
+            GL.VertexAttribPointer(2, 3, VertexAttribPointerType.Float, false, sizeof(ICVertex), Marshal.OffsetOf(typeof(ICVertex), "TexCoords"));
 
             GL.BindVertexArray(0);
         }
