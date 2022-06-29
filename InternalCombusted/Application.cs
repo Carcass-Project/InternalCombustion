@@ -16,6 +16,7 @@ class Application
 
     void onLoad()
     {
+        GL.Enable(EnableCap.CullFace);
         GL.Enable(EnableCap.DepthTest);
 
         renderer = new ICRenderer(System.Drawing.Color.DeepSkyBlue, 800, 600);
@@ -35,7 +36,7 @@ class Application
         DevInput.onMouseMove += OnMouseMove;
         DevInput.onKeyPressed += OnKeyDown;
 
-        cam = new ICCamera(new Vector3(0, 0, -5), window.Size.X / (float)window.Size.Y);
+        cam = new ICCamera(new Vector3(0, 0, 0), window.Size.X / (float)window.Size.Y);
 
         window.CursorGrabbed = true;
     }
@@ -44,10 +45,15 @@ class Application
     {
         renderer?.Clear();
 
-        basicShader.SetMatrix4("viewproj", cam.GetProjectionMatrix() * cam.GetViewMatrix());
+        //basicShader.SetMatrix4("viewproj", cam.GetProjectionMatrix() * cam.GetViewMatrix());
+
+        basicShader.SetMatrix4("view", cam.GetViewMatrix());
+        basicShader.SetMatrix4("proj", cam.GetProjectionMatrix());
 
         GL.DepthMask(true);
         msh.Draw();
+
+        Thread.Sleep(1/60);
     }
 
     int i = 0;
@@ -56,15 +62,15 @@ class Application
     void OnKeyDown(ICKeyEventArgs args)
     {
         if(args.key == OpenTK.Windowing.GraphicsLibraryFramework.Keys.W)
-            cam.Position += cam.Front * 1.5f * (float)args._dt;
+            cam.Position += cam.Front * 90.5f * (float)args._dt;
         if (args.key == OpenTK.Windowing.GraphicsLibraryFramework.Keys.S)
-            cam.Position -= cam.Front * 1.5f * (float)args._dt;
+            cam.Position -= cam.Front * 90.5f * (float)args._dt;
         if (args.key == OpenTK.Windowing.GraphicsLibraryFramework.Keys.A)
-            cam.Position -= cam.Right * 1.5f * (float)args._dt;
+            cam.Position -= cam.Right * 90.5f * (float)args._dt;
         if (args.key == OpenTK.Windowing.GraphicsLibraryFramework.Keys.D)
-            cam.Position += cam.Right * 1.5f * (float)args._dt;
+            cam.Position += cam.Right * 90.5f * (float)args._dt;
         if (args.key == OpenTK.Windowing.GraphicsLibraryFramework.Keys.Escape)
-            window.CursorGrabbed = false;
+            window.Close();
     }
 
     bool firstMouse = true;
