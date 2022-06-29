@@ -30,10 +30,12 @@ namespace InternalCombustion
         {
             vertexArrObj.Bind();
 
-            material.matShader.SetMatrix4("model", Matrix4.CreateTranslation(position) * Matrix4.CreateScale(size) * rotation);
+            material.matShader.SetMatrix4("model", Matrix4.CreateTranslation(position) * rotation * Matrix4.CreateScale(size));
             material.matShader.SetVector3("modelColor", ((Vector4)material.matColor).Xyz);
 
             material.matShader.Use();
+
+            elementBuffer.Bind();
 
             GL.DrawElements(BeginMode.Triangles, indices.Length, DrawElementsType.UnsignedInt, 0); 
             GL.BindVertexArray(0);
@@ -45,7 +47,7 @@ namespace InternalCombustion
             vertexBuffer.Destroy();
         }
 
-        public unsafe Mesh(uint[] Indices, ICVertex[] Vertices)
+        public unsafe Mesh(uint[] Indices, ICVertex[] Vertices, ICMaterial mat)
         {
             indices = Indices;
             vertices = Vertices;
@@ -58,6 +60,9 @@ namespace InternalCombustion
 
             vertexArrObj = new Internals.VAO();
             vertexArrObj.Bind();
+
+            var vertexLocation = mat.matShader.GetAttribLocation("aPos");
+            GL.EnableVertexAttribArray(vertexLocation);
 
             GL.EnableVertexAttribArray(0);
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, sizeof(ICVertex), 0);
@@ -73,7 +78,7 @@ namespace InternalCombustion
         #endregion
 
         #region StaticFunctions
-        public static Mesh GenMeshCube()
+        public static Mesh GenMeshCube(ICMaterial mat)
         {
             Mesh msh;
 
@@ -98,9 +103,8 @@ namespace InternalCombustion
                  4, 5, 0, 0, 5, 1
             };
 
-            msh = new Mesh(indices.ToArray(), vertices.ToArray());
+            msh = new Mesh(indices.ToArray(), vertices.ToArray(), mat);
 
-            msh.material = ICMaterial.Default;
             msh.position = new Vector3(0, 0, 0);
             msh.size = Vector3.One;
             msh.rotation = Matrix4.CreateRotationX(0) * Matrix4.CreateRotationY(0) * Matrix4.CreateRotationZ(0);
