@@ -12,11 +12,17 @@ namespace InternalCombustion
 {
     public class ICWindow : GameWindow
     {
+        /// <summary>
+        /// Set this first, before making ur window.
+        /// </summary>
+        public static string Name { get; set; }
+        public static OpenTK.Mathematics.Vector2i size { get; set; }
+
         public static NativeWindowSettings nwst {get{
             var nw = new NativeWindowSettings();
-            nw.NumberOfSamples = 4;
-            nw.Size = new OpenTK.Mathematics.Vector2i(800,600);
-            nw.Title = "Internal Combustion";
+            nw.NumberOfSamples = 8;
+            nw.Size = size;
+            nw.Title = Name;
             return nw;
         }}
 

@@ -1,11 +1,33 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net6.0</TargetFramework>
+    <Configuration>Release</Configuration>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>res\icon.ico</ApplicationIcon>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>InternalCombustion</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Carcass-Project</Authors>
+    <Description>The InternalCombustion rendering engine, that helps
+work with 3D graphics, by providing mesh drawing functions, texture loading, easy shader usage, and basic Input, windowing.
+
+The Graphics API used is OpenGL.</Description>
+    <Copyright>© Carcass-Project, 2022.</Copyright>
+    <PackageProjectUrl>https://github.com/Carcass-Project/InternalCombustion</PackageProjectUrl>
+    <PackageIcon>64x64-icon.png</PackageIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +35,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\..\..\OneDrive\Documents\INTCOMBE\64x64-icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="OpenTK" Version="4.7.4" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
   </ItemGroup>
 
 </Project>

@@ -31,6 +31,7 @@ namespace InternalCombustion
             vertexArrObj.Bind();
 
             material.matShader.SetMatrix4("model", Matrix4.CreateTranslation(position) * rotation * Matrix4.CreateScale(size));
+            
             material.matShader.SetVector3("modelColor", ((Vector4)material.matColor).Xyz);
 
             material.matShader.Use();
@@ -80,25 +81,31 @@ namespace InternalCombustion
             Mesh msh;
 
             List<ICVertex> vertices = new List<ICVertex>();
-
-            vertices.Add(new ICVertex(new Vector3(-1, -1, -1)));
-            vertices.Add(new ICVertex(new Vector3(1, -1, -1)));
-            vertices.Add(new ICVertex(new Vector3(1, 1, -1)));
-            vertices.Add(new ICVertex(new Vector3(-1, 1, -1)));
-            vertices.Add(new ICVertex(new Vector3(-1, -1, 1)));
-            vertices.Add(new ICVertex(new Vector3(1, -1, 1)));
-            vertices.Add(new ICVertex(new Vector3(1, 1, 1)));
-            vertices.Add(new ICVertex(new Vector3(-1, 1, 1)));
-
-            List<uint> indices = new List<uint>
-            {
-                 0, 1, 3, 3, 1, 2,
-                 1, 5, 2, 2, 5, 6,
-                 5, 4, 6, 6, 4, 7,
-                 4, 0, 7, 7, 0, 3,
-                 3, 2, 7, 7, 2, 6,
-                 4, 5, 0, 0, 5, 1
-            };
+            vertices.Add(new ICVertex(new Vector3(-1, 1, -1), new Vector3(0, 0, 1), new Vector2(0, 1)));
+            vertices.Add(new ICVertex(new Vector3(1, 1, 1), new Vector3(0, 0, 1), new Vector2(1, 0)));
+            vertices.Add(new ICVertex(new Vector3(1, 1, -1), new Vector3(0, 0, 1), new Vector2(1, 1)));
+            vertices.Add(new ICVertex(new Vector3(1, 1, 1), new Vector3(0, 0, 0), new Vector2(1, 1)));
+            vertices.Add(new ICVertex(new Vector3(-1, -1, 1), new Vector3(0, 0, 0), new Vector2(0, 0)));
+            vertices.Add(new ICVertex(new Vector3(1, -1, 1), new Vector3(0, 0, 0), new Vector2(1, 0)));
+            vertices.Add(new ICVertex(new Vector3(-1, 1, 1), new Vector3(-1, -1, 0), new Vector2(0, 1)));
+            vertices.Add(new ICVertex(new Vector3(-1, -1, -1), new Vector3(-1, -1, 0), new Vector2(1, 0)));
+            vertices.Add(new ICVertex(new Vector3(-1, -1, 1), new Vector3(-1, -1, 0), new Vector2(0, 0)));
+            vertices.Add(new ICVertex(new Vector3(1, -1, -1), new Vector3(0, 0, -1), new Vector2(1, 1)));
+            vertices.Add(new ICVertex(new Vector3(-1, -1, 1), new Vector3(0, 0, -1), new Vector2(0, 0)));
+            vertices.Add(new ICVertex(new Vector3(-1, -1, -1), new Vector3(0, 0, -1), new Vector2(0, 1)));
+            vertices.Add(new ICVertex(new Vector3(1, 1, -1), new Vector3(1, 1, 0), new Vector2(1, 1)));
+            vertices.Add(new ICVertex(new Vector3(1, -1, 1), new Vector3(1, 1, 0), new Vector2(0, 0)));
+            vertices.Add(new ICVertex(new Vector3(1, -1, -1), new Vector3(1, 1, 0), new Vector2(1, 0)));
+            vertices.Add(new ICVertex(new Vector3(-1, 1, -1), new Vector3(0, 0, 0), new Vector2(0, 1)));
+            vertices.Add(new ICVertex(new Vector3(1, -1, -1), new Vector3(0, 0, 0), new Vector2(1, 0)));
+            vertices.Add(new ICVertex(new Vector3(-1, -1, -1), new Vector3(0, 0, 0), new Vector2(0, 0)));
+            vertices.Add(new ICVertex(new Vector3(-1, 1, 1), new Vector3(0, 0, 1), new Vector2(0, 0)));
+            vertices.Add(new ICVertex(new Vector3(-1, 1, 1), new Vector3(0, 0, 0), new Vector2(0, 1)));
+            vertices.Add(new ICVertex(new Vector3(-1, 1, -1), new Vector3(-1, -1, 0), new Vector2(1, 1)));
+            vertices.Add(new ICVertex(new Vector3(1, -1, 1), new Vector3(0, 0, -1), new Vector2(1, 0)));
+            vertices.Add(new ICVertex(new Vector3(1, 1, 1), new Vector3(1, 1, 0), new Vector2(0, 1)));
+            vertices.Add(new ICVertex(new Vector3(1, 1, -1), new Vector3(0, 0, 0), new Vector2(1, 1)));
+            List<uint> indices = new List<uint> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 0, 18, 1, 3, 19, 4, 6, 20, 7, 9, 21, 10, 12, 22, 13, 15, 23, 16 };
 
             msh = new Mesh(indices.ToArray(), vertices.ToArray());
 
