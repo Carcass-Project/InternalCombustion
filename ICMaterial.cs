@@ -11,7 +11,9 @@ namespace InternalCombustion
     {
         public Shader matShader;
         public Color4 matColor = Color4.Red;
-
+        /// <summary>
+        /// To use this, you must have a "vertex.glsl", and "fragment.glsl".
+        /// </summary>
         public static ICMaterial Default { 
             get
             {
