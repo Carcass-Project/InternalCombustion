@@ -9,6 +9,7 @@ using OpenTK.Windowing.Desktop;
 using OpenTK.Mathematics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 using PixelFormat = OpenTK.Graphics.OpenGL.PixelFormat;
 using OpenTK.Graphics.OpenGL;
 
@@ -23,6 +24,7 @@ namespace InternalCombustion
 
         public PostProcShader shader;
         public Internals.VAO screenVAO;
+        public Internals.VBO screenVBO;
 
         public void Clear()
         {
@@ -56,6 +58,7 @@ namespace InternalCombustion
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
             GL.BindTexture(TextureTarget.Texture2D, 0);
+            shader._shader.SetInt("renderTexture", 0);
             GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.ColorAttachment0, TextureTarget.Texture2D, idf, 0);
 
             renderBuffer.Bind();
@@ -73,10 +76,10 @@ namespace InternalCombustion
             GL.ClearColor(1.0f, 1.0f, 1.0f, 1.0f);
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            GL.ActiveTexture(TextureUnit.Texture0);
-            GL.BindTexture(TextureTarget.Texture2D, rndTxID);
+            /*GL.ActiveTexture(TextureUnit.Texture0);
+            GL.BindTexture(TextureTarget.Texture2D, rndTxID);*/
 
-            shader._shader.SetInt("renderTexture", 0);
+      
             shader._shader.Use();
 
             screenVAO.Bind();
@@ -93,7 +96,7 @@ namespace InternalCombustion
             GL.EnableVertexAttribArray(0);
         }
 
-        public ICRenderer(System.Drawing.Color ClearColor, int width, int height)
+        public unsafe ICRenderer(System.Drawing.Color ClearColor, int width, int height)
         {
             clearColor = ClearColor;
             sizeX = width;
@@ -102,6 +105,42 @@ namespace InternalCombustion
             GL.Viewport(0, 0, sizeX.Value, sizeY.Value);
 
             screenVAO = new Internals.VAO();
+            screenVBO = new Internals.VBO();
+
+            /*
+              // positions   // texCoords
+        -1.0f,  1.0f,  0.0f, 1.0f,
+        -1.0f, -1.0f,  0.0f, 0.0f,
+         1.0f, -1.0f,  1.0f, 0.0f,
+
+        -1.0f,  1.0f,  0.0f, 1.0f,
+         1.0f, -1.0f,  1.0f, 0.0f,
+         1.0f,  1.0f,  1.0f, 1.0f*/
+
+            ICVertex[] scrVerts = new ICVertex[]
+            {
+                new ICVertex(new Vector3(-1.0f,1.0f,0), new Vector2(0,1)),
+                new ICVertex(new Vector3(-1.0f,-1.0f,0), new Vector2(0,0)),
+                new ICVertex(new Vector3(1.0f,-1.0f,0), new Vector2(1,0)),
+                new ICVertex(new Vector3(-1.0f,1.0f,0), new Vector2(0,1)),
+                new ICVertex(new Vector3(1.0f,-1.0f,0), new Vector2(1,0)),
+                new ICVertex(new Vector3(1.0f,1.0f,0), new Vector2(1,1))
+            };
+
+            screenVBO.Bind();
+            screenVAO.Bind();
+            screenVBO.SetData(sizeof(ICVertex)*scrVerts.Length, scrVerts);
+
+            GL.EnableVertexAttribArray(0);
+            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, sizeof(ICVertex), 0);
+
+            GL.EnableVertexAttribArray(1);
+            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, sizeof(ICVertex), Marshal.OffsetOf(typeof(ICVertex), "Normal"));
+
+            GL.EnableVertexAttribArray(2);
+            GL.VertexAttribPointer(2, 3, VertexAttribPointerType.Float, false, sizeof(ICVertex), Marshal.OffsetOf(typeof(ICVertex), "TexCoords"));
+
+            GL.BindVertexArray(0);
         }
 
     }
