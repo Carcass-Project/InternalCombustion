@@ -10,5 +10,5 @@ Yes, of course you can! Just fork the repository, and do your changes! You can a
 
 # Why the name?
 
-Well it's more of a joke, that it's gonna be so horribly name, that it will cause your PC to internally combust. 
+Well it's more of a joke, that it's gonna be so horribly made, that it will cause your PC to internally combust. 
 However this theory proved wrong, and it runs fast, with low memory, and GPU usage.
