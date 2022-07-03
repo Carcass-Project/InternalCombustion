@@ -39,6 +39,7 @@ namespace InternalCombustion
             elementBuffer.Bind();
 
             GL.DrawElements(BeginMode.Triangles, indices.Length, DrawElementsType.UnsignedInt, 0); 
+            //GL.DrawElementsIndirect(PrimitiveType.Triangles, DrawElementsType.UnsignedInt, indices);
             GL.BindVertexArray(0);
         }
 

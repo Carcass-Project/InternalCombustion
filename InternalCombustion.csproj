@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <Configuration>Release</Configuration>
+    <Configuration>Debug</Configuration>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>res\icon.ico</ApplicationIcon>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
@@ -21,14 +21,19 @@ The Graphics API used is OpenGL.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>none</DebugType>
-    <Optimize>True</Optimize>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>none</DebugType>
+    <DebugType>portable</DebugType>
     <Optimize>True</Optimize>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\bitte\.nuget\packages\sharpfont.dependencies\2.6.0\build\..\bin\msvc10\x86\freetype6.dll" />
+    <Content Remove="C:\Users\bitte\.nuget\packages\sharpfont\4.0.1\build\..\config\SharpFont.dll.config" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="res\icon.ico" />
@@ -43,7 +48,24 @@ The Graphics API used is OpenGL.</Description>
 
   <ItemGroup>
     <PackageReference Include="OpenTK" Version="4.7.4" />
+    <PackageReference Include="SharpFont" Version="4.0.1" />
+    <PackageReference Include="SharpFont.Dependencies" Version="2.6.0" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SharpFont">
+      <HintPath>bin\Release\net6.0\SharpFont (1).dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="freetype6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="SharpFont.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
