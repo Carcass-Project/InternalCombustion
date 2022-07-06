@@ -10,15 +10,16 @@ namespace InternalCombustion
     public class ICMaterial
     {
         public Shader matShader;
-        public Color4 matColor = Color4.Black;
+        public static Shader _default;
+        public Color4 matColor = Color4.White;
+
         /// <summary>
-        /// To use this, you must have a "vertex.glsl", and "fragment.glsl".
+        /// Default Material, change _default Shader to your default object-rendering shader before using first.
         /// </summary>
         public static ICMaterial Default { 
             get
             {
-                var shader = new Shader("vertex.glsl", "fragment.glsl");
-                var icm = new ICMaterial(shader);
+                var icm = new ICMaterial(_default);
 
                 return icm;
             } 

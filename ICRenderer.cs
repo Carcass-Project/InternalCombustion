@@ -23,6 +23,7 @@ namespace InternalCombustion
         public Internals.RBO renderBuffer;
 
         public PostProcShader shader;
+        public bool UsePostProc = false;
         public Internals.VAO screenVAO;
         public Internals.VBO screenVBO;
 
@@ -59,7 +60,8 @@ namespace InternalCombustion
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
             GL.BindTexture(TextureTarget.Texture2D, 0);
-            shader._shader.SetInt("renderTexture", 0);
+
+            shader._shader.SetInt("renderTexture", 1);
             GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.ColorAttachment0, TextureTarget.Texture2D, idf, 0);
 
             renderBuffer.Bind();
@@ -80,7 +82,6 @@ namespace InternalCombustion
             /*GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, rndTxID);*/
 
-      
             shader._shader.Use();
 
             screenVAO.Bind();

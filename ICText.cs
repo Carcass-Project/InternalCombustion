@@ -31,11 +31,11 @@ namespace InternalCombustion
         public static Vector2i screenSize;
         static Matrix4 projectionM = Matrix4.CreateScale(new Vector3(1f / screenSize.X, 1f / screenSize.Y, 1.0f));
 
-        public static void Init(Vector2i scrSize)
+        public static void Init(Vector2i scrSize, Shader textShader)
         {
             screenSize = scrSize;
             InitVBOVAO();
-            shader = new Shader("textVertex.glsl", "textFrag.glsl");
+            shader = textShader;
             shader.Use();
         }
 
@@ -50,7 +50,6 @@ namespace InternalCombustion
 
             font.Name = Path.GetFileNameWithoutExtension(path);
 
-            // set 1 byte pixel alignment 
             GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
             font.chars = new Dictionary<uint, Character>();
 
