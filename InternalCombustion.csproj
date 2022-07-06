@@ -47,6 +47,7 @@ The Graphics API used is OpenGL.</Description>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ImGui.NET" Version="1.87.3" />
     <PackageReference Include="OpenTK" Version="4.7.4" />
     <PackageReference Include="SharpFont" Version="4.0.1" />
     <PackageReference Include="SharpFont.Dependencies" Version="2.6.0" />

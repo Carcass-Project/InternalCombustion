@@ -16,7 +16,7 @@ namespace InternalCombustion.Internals
         public void Bind()
         {
             GL.BindRenderbuffer(RenderbufferTarget.Renderbuffer, id);
-            GL.RenderbufferStorage(RenderbufferTarget.Renderbuffer, RenderbufferStorage.Depth24Stencil8, x, y);
+            //GL.RenderbufferStorageMultisample(RenderbufferTarget.Renderbuffer, 1, RenderbufferStorage.Depth24Stencil8, x, y);
             GL.BindRenderbuffer(RenderbufferTarget.Renderbuffer, 0);
         }
 
@@ -27,6 +27,7 @@ namespace InternalCombustion.Internals
             y = Y;
             GL.BindRenderbuffer(RenderbufferTarget.Renderbuffer, id);
             GL.RenderbufferStorage(RenderbufferTarget.Renderbuffer, RenderbufferStorage.Depth24Stencil8, x, y);
+            //GL.RenderbufferStorageMultisample(RenderbufferTarget.Renderbuffer, 1, RenderbufferStorage.Depth24Stencil8, x, y);
             GL.BindRenderbuffer(RenderbufferTarget.Renderbuffer, 0);
         }
     }

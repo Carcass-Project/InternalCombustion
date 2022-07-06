@@ -25,6 +25,8 @@ namespace InternalCombustion
                 // The fragment shader is responsible for then converting the vertices to "fragments", which represent all the data OpenGL needs to draw a pixel.
                 //   The fragment shader is what we'll be using the most here.
 
+
+                
                 // Load vertex shader and compile
                 var shaderSource = File.ReadAllText(vertPath);
 
@@ -86,6 +88,7 @@ namespace InternalCombustion
             }
             catch (Exception ex)
             {
+                Console.WriteLine("[SHADER LINK ERROR]: " + GL.GetProgramInfoLog(Handle));
                 throw ex;
             }
         }
@@ -115,6 +118,7 @@ namespace InternalCombustion
             if (code != (int)All.True)
             {
                 // We can use `GL.GetProgramInfoLog(program)` to get information about the error.
+                Console.WriteLine("[SHADER LINK ERROR]: "+GL.GetProgramInfoLog(program));
                 throw new Exception($"Error occurred whilst linking Program({program})");
             }
         }

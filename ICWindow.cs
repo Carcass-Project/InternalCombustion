@@ -16,6 +16,8 @@ namespace InternalCombustion
         /// Set this first, before making ur window.
         /// </summary>
         public static string Name { get; set; }
+
+        public CImGui.ImGuiController _controller;
         public static OpenTK.Mathematics.Vector2i size { get; set; }
 
         public static NativeWindowSettings nwst {get{
@@ -38,14 +40,20 @@ namespace InternalCombustion
             GL.Enable(EnableCap.DepthTest);
             GL.Enable(EnableCap.Multisample);
 
+            _controller = new CImGui.ImGuiController(ClientSize.X, ClientSize.Y);
+
             _OnLoad?.Invoke();
         }
 
         protected override void OnRenderFrame(FrameEventArgs args)
         {
             base.OnRenderFrame(args);
+            _controller.Update(this, (float)args.Time);
             DevInput._deviceDeltaTime = (float)args.Time;
             _OnRender?.Invoke(args.Time);
+            _controller.Render();
+
+            CImGui.ImGuiController.CheckGLError("End of frame");
             SwapBuffers();
         }
 
